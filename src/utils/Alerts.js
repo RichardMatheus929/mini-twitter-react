@@ -12,7 +12,7 @@ export const alertLikeError = () => {
 }
 
 export const alertLikePost = () => {
-    Swal.fire({
+    CustomSwal.fire({
         title: "Post curtido com sucesso!",
         text: "Você curtiu o post com sucesso.",
         icon: "success",
@@ -21,7 +21,40 @@ export const alertLikePost = () => {
         confirmButtonText: "Ok",
         toast: true,
         position: "top-end",
+        timer: 1500,
+        timerProgressBar: true,
+    });
+}
+
+export const alertExpireToken = () => {
+    CustomSwal.fire({
+        title: "Sessão expirada",
+        text: "Sua sessão expirou. Você será redirecionado para a página de login.",
+        icon: "warning",
+        showCancelButton: false,
+        showConfirmButton: false,
+        confirmButtonText: "Ok",
+        toast: true,
+        position: "top-end",
         timer: 2000,
+        timerProgressBar: true,
+    });
+    setTimeout(() => {
+        window.location.href = "/login";
+    }, 2000);
+}
+
+export const alertUnlikePost = () => {
+    CustomSwal.fire({
+        title: "Post descurtido com sucesso!",
+        text: "Você descurtiu o post com sucesso.",
+        icon: "success",
+        showCancelButton: false,
+        showConfirmButton: false,
+        confirmButtonText: "Ok",
+        toast: true,
+        position: "top-end",
+        timer: 1500,
         timerProgressBar: true,
     });
 }

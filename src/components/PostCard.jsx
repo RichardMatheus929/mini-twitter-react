@@ -1,12 +1,12 @@
 import React from "react";
-import { like } from "../api/endpoints/like";
+import { like, unlike} from "../api/endpoints/like";
 
 import moment from 'moment';
 import 'moment/locale/pt-br'; 
 
 moment.locale('pt-br');
 
-const PostCard = ({ id, content, created_at, user }) => {
+const PostCard = ({ id, content, created_at, user, likes_user }) => {
 
   const handleLike = () => {
     like({
@@ -14,8 +14,18 @@ const PostCard = ({ id, content, created_at, user }) => {
     })
   }
 
+  const handleUnlike = () => {
+    unlike(id);
+  }
+
+  const user_id = JSON.parse(localStorage.getItem("user"))?.id;
+  const isLiked = likes_user.includes(user_id);
+
   return (
-    <div className="card shadow-sm mb-4" style={{ maxWidth: "600px", margin: "0 auto" }}>
+    <div
+      className="card shadow-sm mb-4"
+      style={{ maxWidth: "600px", margin: "0 auto" }}
+    >
       {/* Header do post */}
       <div className="card-header bg-white d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
@@ -30,13 +40,24 @@ const PostCard = ({ id, content, created_at, user }) => {
 
       {/* Corpo do post */}
       <div className="card-body">
-        <p className="card-text">
-          {content} 
-        </p>
+        <p className="card-text">{content}</p>
         <div className="d-flex justify-content-start gap-3 mt-2">
-          <button className="btn btn-sm btn-outline-primary" onClick={handleLike}>Curtir</button>
-          <button className="btn btn-sm btn-outline-secondary">Comentar</button>
-          <button className="btn btn-sm btn-outline-secondary">Compartilhar</button>
+          <button
+            className={`btn btn-sm ${
+              isLiked ? "btn-primary" : "btn-outline-primary"
+            }`}
+            onClick={handleLike}
+          >
+            {isLiked ? "Curtido" : "Curtir"}
+          </button>
+
+          {isLiked ? (
+            <button className={"btn btn-sm btn-danger"} onClick={handleUnlike}>
+              Descurtir
+            </button>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
     </div>

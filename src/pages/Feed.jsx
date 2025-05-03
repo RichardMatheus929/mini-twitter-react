@@ -6,13 +6,23 @@ import Sidebar from "../components/Sidebar";
 import { getPosts } from "../api/endpoints/posts";
 
 const Feed = () => {
+  
   const [posts, setPosts] = useState([]);
+  const [count, setCount] = useState(0);
+  const [next, setNext] = useState(null);
+  const [previous, setPrevious] = useState(null);
+  const [currentUrl, setCurrentUrl] = useState(null);
+
+  const fetchPosts = async (url = null) => {
+    const response = await getPosts(url);
+    setPosts(response.data.results);
+    setCount(response.data.count);
+    setNext(response.data.next);
+    setPrevious(response.data.previous);
+    setCurrentUrl(url);
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await getPosts();
-      setPosts(response.data);
-    };
     fetchPosts();
   }, []);
 
@@ -35,15 +45,34 @@ const Feed = () => {
               </h2>
             </div>
 
-            <div
-                style={{
-                  maxHeight: "70vh",
-                  overflowY: "auto",
-                  backgroundColor: "#f8f9fa",
-                  borderRadius: "0.5rem",
-                  boxShadow: "0 0 10px rgba(0,0,0,0.05)", 
-                }}
+            <div className="d-flex justify-content-center align-items-center mb-4" style={{ gap: "1rem" }}>
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => fetchPosts(previous)}
+                disabled={!previous}
               >
+                Anterior
+              </button>
+
+              <span className="text-muted">Vendo {posts.length} de {count}</span>
+
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => fetchPosts(next)}
+                disabled={!next}
+              >
+                Próxima
+              </button>
+            </div>
+            <div
+              style={{
+                maxHeight: "62vh",
+                overflowY: "auto",
+                backgroundColor: "#f8f9fa",
+                borderRadius: "0.5rem",
+                boxShadow: "0 0 10px rgba(0,0,0,0.05)",
+              }}
+            >
               {posts.length > 0 ? (
                 posts.map((post) => <PostCard key={post.id} {...post} />)
               ) : (

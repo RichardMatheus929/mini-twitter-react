@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { alertExpireToken } from '../utils/Alerts';
+
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
 });
@@ -35,7 +37,7 @@ api.interceptors.response.use(
       // Aqui, redirecionamos para o login
       // Porém, essa navegação deve ser feita com cautela
       // Evite a navegação direta no interceptor, preferencialmente use um sistema global de gerenciamento de navegação.
-      window.location.href = '/login';
+      alertExpireToken();
     }
     return Promise.reject(error);
   }
