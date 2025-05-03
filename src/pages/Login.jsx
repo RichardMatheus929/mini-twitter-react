@@ -20,7 +20,7 @@ export default function Login() {
       localStorage.setItem("refresh", response.data.refresh)
       localStorage.setItem("user", JSON.stringify(response.data.user))
 
-      window.location.href = "/feed";
+      window.location.href = "/ ";
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.detail || "Erro ao fazer login");
