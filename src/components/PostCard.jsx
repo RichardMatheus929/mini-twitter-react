@@ -1,6 +1,11 @@
 import React from "react";
 import { like } from "../api/endpoints/like";
 
+import moment from 'moment';
+import 'moment/locale/pt-br'; 
+
+moment.locale('pt-br');
+
 const PostCard = ({ id, content, created_at, user }) => {
 
   const handleLike = () => {
@@ -16,7 +21,8 @@ const PostCard = ({ id, content, created_at, user }) => {
         <div className="d-flex align-items-center">
           <strong>{user}</strong>
         </div>
-        <small className="text-muted">{created_at}</small>
+        {/* o moment não quis ficar em português de jeito nenhum 🙁 */}
+        <small className="text-muted">{moment(created_at).fromNow()}</small>
       </div>
 
       {/* Imagem do post */}
