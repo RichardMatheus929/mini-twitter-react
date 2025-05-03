@@ -16,7 +16,11 @@ export default function Login() {
         password,
       });
 
-      console.log(response.data);
+      localStorage.setItem("access", response.data.access)
+      localStorage.setItem("refresh", response.data.refresh)
+      localStorage.setItem("user", JSON.stringify(response.data.user))
+
+      window.location.href = "/feed";
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.detail || "Erro ao fazer login");
