@@ -12,13 +12,13 @@ const [image, setImage] = useState(null);
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("content", content);
+    const form = new FormData();
+    form.append("content", content);
     if (image) {
-      formData.append("image", image);
+      form.append("image_content", image);
     }
 
-
+    createPost(form);
 }
 
   return (

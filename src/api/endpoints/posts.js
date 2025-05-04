@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import api from "../axios";
 
 export const getPosts = (url, order) => {
@@ -15,4 +16,7 @@ export const getPosts = (url, order) => {
     return api.get("/posts", );
 }
 
-export const
+export const createPost = (data) => {
+    console.log(data)
+    return api.post("posts/", data,)
+};

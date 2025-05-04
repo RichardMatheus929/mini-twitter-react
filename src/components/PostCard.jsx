@@ -6,7 +6,7 @@ import 'moment/locale/pt-br';
 
 moment.locale('pt-br');
 
-const PostCard = ({ id, content, created_at, user, likes_user }) => {
+const PostCard = ({ id, content, created_at, user, likes_user, image_content }) => {
 
   const handleLike = () => {
     like({
@@ -36,7 +36,11 @@ const PostCard = ({ id, content, created_at, user, likes_user }) => {
       </div>
 
       {/* Imagem do post */}
-      {/* <img src={imageUrl} className="card-img-top" alt="Post" /> */}
+      {image_content ? (
+        <img src={image_content} className="card-img-top" alt="Post" />
+      ): (
+        <div></div>
+      )}
 
       {/* Corpo do post */}
       <div className="card-body">
