@@ -1,12 +1,15 @@
-# React + Vite
+## Instruções para rodar
+Clone o repositório
+```
+git clone https://github.com/RichardMatheus929/mini-twitter-react
+```
+Execute o docker compose 
+```
+docker compose up --build
+```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Considerações
+O front não era o foco do projeto, então é possível que alguns bugs passem em branco. O ordenar não conseguir fazer funcioanar bem no front por conta da manipulação das query strings e enfim.
+Também é possível que existam funcionalidades disponíveis no back que não foram implementadas no front. Também é possível que não tenha seguido as melhores práticas de desenvolvimento no front afinal não tenho tanta familiaride com react comparado ao django.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+No pior dos casos, a documentação do postman está bem completa e você pode testar 100% por lá 😉. Valeeu
