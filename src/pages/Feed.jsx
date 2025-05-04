@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BsSortDown, BsSortUp } from "react-icons/bs"; // ícone de ordenação
 
 import PostCard from "../components/PostCard";
 import Sidebar from "../components/Sidebar";
@@ -12,15 +13,24 @@ const Feed = () => {
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const [currentUrl, setCurrentUrl] = useState(null);
+  const [order, setOrder] = useState("desc");
 
-  const fetchPosts = async (url = null) => {
-    const response = await getPosts(url);
+  const fetchPosts = async (url = null, order = null) => {
+    const response = await getPosts(url, order);
     setPosts(response.data.results);
     setCount(response.data.count);
     setNext(response.data.next);
     setPrevious(response.data.previous);
     setCurrentUrl(url);
   };
+
+  const handleOrder = () => {
+    const newOrder = order === "desc" ? "asc" : "desc";
+    setOrder(newOrder);
+    console.log(newOrder)
+    console.log(currentUrl)
+    fetchPosts(currentUrl, newOrder);
+  }
 
   useEffect(() => {
     fetchPosts();
@@ -45,7 +55,10 @@ const Feed = () => {
               </h2>
             </div>
 
-            <div className="d-flex justify-content-center align-items-center mb-4" style={{ gap: "1rem" }}>
+            <div
+              className="d-flex justify-content-center align-items-center mb-4"
+              style={{ gap: "1rem" }}
+            >
               <button
                 className="btn btn-outline-primary"
                 onClick={() => fetchPosts(previous)}
@@ -54,8 +67,6 @@ const Feed = () => {
                 Anterior
               </button>
 
-              <span className="text-muted">Vendo {posts.length} de {count}</span>
-
               <button
                 className="btn btn-outline-primary"
                 onClick={() => fetchPosts(next)}
@@ -63,6 +74,20 @@ const Feed = () => {
               >
                 Próxima
               </button>
+
+              <span className="text-muted">
+                Vendo {posts.length} de {count}
+              </span>
+
+              <div>
+                <button
+                  className="btn btn-outline-warning d-flex align-items-center gap-2"
+                  onClick={handleOrder}
+                >
+                  {order === "desc" ? <BsSortDown /> : <BsSortUp />}
+                  Ordenar
+                </button>
+              </div>
             </div>
             <div
               style={{

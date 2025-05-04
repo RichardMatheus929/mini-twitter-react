@@ -18,19 +18,19 @@ const Sidebar = () => {
         <li className="nav-item mb-2">
           <Link to="/" className="nav-link text-white">
             <FaHome className="me-2 text-warning" />
-            Home
+            Feed
           </Link>
         </li>
         <li className="nav-item mb-2">
-          <Link to="/profile" className="nav-link text-white">
+          <Link to="/users" className="nav-link text-white">
             <FaUser className="me-2 text-warning" />
-            Profile
+            Perfis
           </Link>
         </li>
         <li className="nav-item mb-2">
-          <Link to="/create" className="nav-link text-white">
+          <Link to="/create-post" className="nav-link text-white">
             <FaPlus className="me-2 text-warning" />
-            Create Post
+            Criar postagem
           </Link>
         </li>
       </ul>
