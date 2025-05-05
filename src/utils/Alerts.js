@@ -58,3 +58,36 @@ export const alertUnlikePost = () => {
         timerProgressBar: true,
     });
 }
+
+export const alertUserNotFound = () => {
+    CustomSwal.fire({
+        title: "Usuário não encontrado",
+        text: "Você será redirecionado para a página de register.",
+        icon: "error",
+        showCancelButton: false,
+        showConfirmButton: false,
+        confirmButtonText: "Ok",
+        toast: true,
+        position: "top-end",
+        timer: 1500,
+        timerProgressBar: true,
+    });
+    setTimeout(() => {
+        window.location.href = "/register";
+    }, 1500);
+}
+
+export const alertInvalidFields = () => {
+    CustomSwal.fire({
+        title: "Campos inválidos",
+        text: "Verifique se todos os campos estão preenchidos corretamente.",
+        icon: "error",
+        showCancelButton: false,
+        showConfirmButton: false,
+        confirmButtonText: "Ok",
+        toast: true,
+        position: "top-end",
+        timer: 1500,
+        timerProgressBar: true,
+    });
+}

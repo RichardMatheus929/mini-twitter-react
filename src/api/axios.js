@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { alertExpireToken } from '../utils/Alerts';
+import { alertExpireToken, alertUserNotFound, alertInvalidFields } from '../utils/Alerts';
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
@@ -25,19 +25,31 @@ api.interceptors.request.use(
 // Interceptor de resposta
 api.interceptors.response.use(
   (response) => {
-    // Retorna a resposta diretamente
+    if (response.config.url.includes('signup')) {
+      window.location.href = '/login';
+    }
     return response;
   },
   (error) => {
     // Tratamento para erro de resposta 401
-    if (error.response && error.response.status === 401) {
+    if (error.response) {
       // Remove o token expirado do localStorage
       localStorage.removeItem('access');
-      
-      // Aqui, redirecionamos para o login
-      // Porém, essa navegação deve ser feita com cautela
-      // Evite a navegação direta no interceptor, preferencialmente use um sistema global de gerenciamento de navegação.
-      alertExpireToken();
+
+      if (error.config.url.includes('signin')) {
+        alertUserNotFound();
+        return Promise.reject(error)
+      }
+
+      if (error.config.url.includes('signup')) {
+        alertInvalidFields();
+        return Promise.reject(error)
+      }
+
+      if (error.response.status === 401) {
+        alertExpireToken();
+        return Promise.reject(error);
+      }
     }
     return Promise.reject(error);
   }

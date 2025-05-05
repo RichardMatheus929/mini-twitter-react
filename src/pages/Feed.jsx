@@ -27,8 +27,6 @@ const Feed = () => {
   const handleOrder = () => {
     const newOrder = order === "desc" ? "asc" : "desc";
     setOrder(newOrder);
-    console.log(newOrder)
-    console.log(currentUrl)
     fetchPosts(currentUrl, newOrder);
   }
 

@@ -15,8 +15,6 @@ export const getPosts = (url, order) => {
     }
     return api.get("/posts", );
 }
-
 export const createPost = (data) => {
-    console.log(data)
-    return api.post("posts/", data,)
+    return api.post("posts/", data)
 };

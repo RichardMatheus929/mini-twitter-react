@@ -1,14 +1,26 @@
 import { useState } from "react";
 
+import { registerUser } from "../api/endpoints/auth";
+
 export default function Register() {
 
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     const handleSubmit = async (e) => {
+
         e.preventDefault()
 
-        const name = useState("");
-        const email = useState("");
-        const username = useState("");
-        const password = useState("");
+        const object = {
+            name: name,
+            email: email,
+            username: username,
+            password: password
+        }
+
+        registerUser(object);
     }
 
     return (
@@ -38,6 +50,7 @@ export default function Register() {
                         Name
                         </label>
                         <input
+                        onChange={(e) => setName(e.target.value)}
                         id="name"
                         type="text"
                         className="form-control"
@@ -53,6 +66,7 @@ export default function Register() {
                         Username
                         </label>
                         <input
+                        onChange={(e) => setUsername(e.target.value)}
                         id="username"
                         type="text"
                         className="form-control"
@@ -68,6 +82,7 @@ export default function Register() {
                         E-Mail Address
                         </label>
                         <input
+                        onChange={(e) => setEmail(e.target.value)}
                         id="email"
                         type="email"
                         className="form-control"
@@ -82,6 +97,7 @@ export default function Register() {
                         Password
                         </label>
                         <input
+                        onChange={(e) => setPassword(e.target.value)}
                         id="password"
                         type="password"
                         className="form-control"
@@ -93,7 +109,7 @@ export default function Register() {
 
                     <div className="align-items-center d-flex">
                         <button type="submit" className="btn btn-primary ms-auto">
-                        Register
+                        Register usuário
                         </button>
                     </div>
                     </form>
