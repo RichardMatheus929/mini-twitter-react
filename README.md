@@ -3,6 +3,10 @@ Clone o repositório
 ```
 git clone https://github.com/RichardMatheus929/mini-twitter-react
 ```
+Recomendo que restart o serviço do docker (Nunca tinha dockerizado aplicações react, comigo deu alguns problemas relacionados a net do docker)
+```
+sudo service docker restart
+```
 Execute o docker compose 
 ```
 docker compose up --build
